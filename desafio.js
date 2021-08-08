@@ -44,7 +44,6 @@ const resultFilterMapReduce = olympicsMedalTable.filter(i => i.continent === "AS
 
 console.log(`Medalhas de Ouro no continente Asiático: ${resultFilterMapReduce}`);
 
-
 // Implemente as funções customizadas - customFilter, customMap e customReduce e verique se o retorno é igual ao do código modelo
 
 const resultByCustomFilterMapReduce = olympicsMedalTable.customFilter(i => i.continent === "ASIA")
@@ -56,21 +55,42 @@ console.log(`Resultado custom - Medalhas de Ouro no continente Asiático: ${resu
 /* DESAFIOS - CONCLUA AS FUNÇÕES customSome, customFind E UTILIZANDO TODAS AS FUNÇÕES 'CUSTOM' CONCLUA OS DESAFIOS ABAIXO: */
 
 // 1 - Crie um algoritmo que encontre o único pais do continente Africano
-// const paisAfricano =  <seu código aqui>;
-// console.log(paisAfricano);
-
+ const existe = olympicsMedalTable.find(olympics => olympics.continent == "AFRICA");
+ console.log( `O país do continente Africano é:` );
+ console.log( existe );
+    
 // 2 - Crie um algoritmo que retorne o total de medalhas por país
-// const medalhasPorPais =  <seu código aqui>;
-// console.log(medalhasPorPais);
+const medalhasPorPais = olympicsMedalTable.map( olympicsMedalTable => {
+    return  {
+        country: olympicsMedalTable.country,
+        total: olympicsMedalTable.gold + olympicsMedalTable.silver + olympicsMedalTable.bronze
+    };
+});
+
+console.log( 'O total de medalhas por país é:' );
+console.log( medalhasPorPais );
+
 
 // 3 - Crie um algoritmo para encontrar os países que conquistaram mais que 10 medalhas de ouro
-// const paisesCom10MedalhasOuroNoMinimo =  <seu código aqui>;
-// console.log(paisesCom10MedalhasOuroNoMinimo);
+const paisesCom10MedalhasOuroNoMinimo = olympicsMedalTable.filter( gold => gold.gold >= 10 );
+console.log( 'Países com mais de 10 medalhas de ouro!');
+console.log( paisesCom10MedalhasOuroNoMinimo );
 
 // 4 - Crie um algoritmo para encontrar os países que conquistaram no minímo 30 medalhas (Ouro, Prata e Bronze)
-// const paisesCom30MedalhasNoMinimo =  <seu código aqui>;
-// console.log(paisesCom30MedalhasNoMinimo);
+const paisesCom30MedalhasNoMinimo = olympicsMedalTable.map( olympicsMedalTable => {
+    return {
+        country: olympicsMedalTable.country,
+        total: olympicsMedalTable.gold + olympicsMedalTable.silver + olympicsMedalTable.bronze
+    };
+}).filter( total => total.total >= 30);
+
+console.log("Os países que conquistaram no minímo 30 medalhas são:");
+console.log(paisesCom30MedalhasNoMinimo);
 
 // 5 - Crie um algoritmo para verificar se o continente América do Sul conquistou pelo menos 20 medalhas de ouro
-// const paisesComPeloMenos20MedalhasDeOUro =  <seu código aqui>;
-// console.log(paisesComPeloMenos20MedalhasDeOUro);
+//some 
+const paisesComPeloMenos20MedalhasDeOUro = olympicsMedalTable.some( gold => 
+    gold.continent == "AMERICA DO SUL" && gold.gold >= 20
+);
+console.log("A América do Sul conquistou pelo menos 20 medalhas de ouro?");
+console.log( paisesComPeloMenos20MedalhasDeOUro );
